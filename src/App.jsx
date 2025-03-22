@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getUsers, getUsersId, updateUser, deleteUser, addUser } from './api.js';
+import { getUsers, updateUser, deleteUser, addUser } from './api.js';
 
 
 
@@ -8,7 +8,7 @@ const App = () => {
 
   const queryClient = useQueryClient();
   const [editId, setEditId] = useState(null);
-  const [editUsername, setEditUsername] = useState("");
+  const [name, setname] = useState("");
   const { data: users, isLoading, isError } = useQuery({
     queryKey: ["users"],
     queryFn: getUsers
@@ -21,7 +21,7 @@ const App = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       setEditId(null);
-      setEditUsername("");
+      setname("");
     }
   });
 
@@ -31,14 +31,16 @@ const App = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
       setEditId(null);
-      setEditUsername("");
+      setname("");
     }
   });
 
   const deleteMutation = useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["users"] })
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      setEditId(null);
+
     }
   });
 
@@ -47,9 +49,9 @@ const App = () => {
     e.preventDefault();
 
     if (editId) {
-      updateMutation.mutate({ id: editId, username: editUsername })
+      updateMutation.mutate({ id: editId, username: name })
     } else {
-      addMutation.mutate({ username: editUsername })
+      addMutation.mutate({ username: name })
     }
 
   }
@@ -59,7 +61,7 @@ const App = () => {
 
       <form onSubmit={handleSubmit}>
 
-        <input type="text" name="username" id="username" value={editUsername} onChange={(e) => setEditUsername(e.target.value)} />
+        <input type="text" name="username" id="username" value={name} onChange={(e) => setname(e.target.value)} />
         <button type="submit">{editId ? "Update" : "Add"} User</button>
       </form>
 
@@ -76,10 +78,13 @@ const App = () => {
 
                   <button onClick={() => {
                     setEditId(user.id);
-                    setEditUsername(user.username);  
+                    setname(user.username);  
                   }}>Edit</button>
                   <button onClick={() => deleteMutation.mutate(user.id)}>Delete</button>
-
+                  <button onClick={() => {
+                    setEditId(null);
+                    setname("");
+                  }}>Cancel</button>
                 </div>
               )
             })}
