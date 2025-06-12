@@ -1,0 +1,132 @@
+/* Main container for the app */
+div {
+  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #2a2a2a; /* Slightly lighter than body for depth */
+  border-radius: 8px;
+  box-shadow: 0 0 15px #000;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+/* Input fields styling */
+input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #333;
+  border: 1px solid #00ffff; /* Primary Neon for border */
+  color: #f0f0f0;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #ff00ff; /* Secondary Neon for focus */
+  box-shadow: 0 0 8px #ff00ff;
+}
+
+/* Button styling */
+button {
+  padding: 10px 15px;
+  border: 1px solid #00ffff; /* Primary Neon border */
+  background-color: transparent;
+  color: #00ffff; /* Primary Neon text */
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:hover, button:focus {
+  background-color: #00ffff;
+  color: #1a1a1a; /* Dark text on hover for contrast */
+  box-shadow: 0 0 5px #00ffff, 0 0 15px #00ffff, 0 0 25px #00ffff;
+  outline: none;
+}
+
+/* Specific button types */
+/* Add/Update button - using Primary Neon */
+form button[type="submit"] {
+  border-color: #00ffff;
+  color: #00ffff;
+}
+form button[type="submit"]:hover,
+form button[type="submit"]:focus {
+  background-color: #00ffff;
+  color: #1a1a1a;
+  box-shadow: 0 0 5px #00ffff, 0 0 15px #00ffff, 0 0 25px #00ffff;
+}
+
+/* Edit button - using Accent Neon */
+div > div > button:nth-of-type(1) { /* Assuming Edit is the first button in the user div */
+  border-color: #39ff14;
+  color: #39ff14;
+}
+div > div > button:nth-of-type(1):hover,
+div > div > button:nth-of-type(1):focus {
+  background-color: #39ff14;
+  color: #1a1a1a;
+  box-shadow: 0 0 5px #39ff14, 0 0 15px #39ff14, 0 0 25px #39ff14;
+}
+
+/* Delete button - using Secondary Neon */
+div > div > button:nth-of-type(2) { /* Assuming Delete is the second button */
+  border-color: #ff00ff;
+  color: #ff00ff;
+}
+div > div > button:nth-of-type(2):hover,
+div > div > button:nth-of-type(2):focus {
+  background-color: #ff00ff;
+  color: #1a1a1a;
+  box-shadow: 0 0 5px #ff00ff, 0 0 15px #ff00ff, 0 0 25px #ff00ff;
+}
+
+/* Cancel button - basic neon outline */
+div > div > button:nth-of-type(3) { /* Assuming Cancel is the third button */
+  border-color: #f0f0f0; /* Using text color for a more subdued neon effect */
+  color: #f0f0f0;
+}
+div > div > button:nth-of-type(3):hover,
+div > div > button:nth-of-type(3):focus {
+  background-color: #f0f0f0;
+  color: #1a1a1a;
+  box-shadow: 0 0 5px #f0f0f0, 0 0 10px #f0f0f0;
+}
+
+
+/* User list item styling */
+div > div { /* Targeting the div that wraps each user's details and buttons */
+  background-color: #222; /* Slightly different from the main container for separation */
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* User paragraph text */
+div > div > p {
+  color: #f0f0f0; /* Ensure default text color is applied */
+  font-size: 18px;
+}
+
+/* Loading/Error messages */
+div > div:only-child { /* If only one div child, it might be loading/error */
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    font-size: 18px;
+    color: #ff00ff; /* Secondary neon for messages */
+}
